@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
 
-const { status } = require('../controllers/messageController')
+const { status, welcome  } = require('../controllers/messageController')
 
+// @desc: Home
+// @route: GET /
+router.get('/', welcome)
 
 // @desc: Checking status of API
 // @route: GET /api/status

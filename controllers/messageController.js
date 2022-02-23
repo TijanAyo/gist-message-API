@@ -1,3 +1,9 @@
+const welcome = (req, res) =>{
+    res.json({
+        Message: 'Welcome 👋',
+        Desc: 'For more details checkout the ReadMe section for this API'
+    })
+}
 const status = (req, res)=>{
     if(!res.status == 200){
         res.status(500).json({
@@ -12,5 +18,5 @@ const status = (req, res)=>{
 
 
 module.exports = {
-    status
+    status, welcome
 }
