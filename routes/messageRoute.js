@@ -9,7 +9,7 @@ router.get('/', welcome)
 
 // @desc: Checking status of API
 // @route: GET /api/status
-router.get('/api/status', status)
+router.get('/api/v1/status', status)
 
 
 module.exports = router;
