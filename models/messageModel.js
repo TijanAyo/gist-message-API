@@ -17,4 +17,4 @@ const messageSchema = new Schema({
 });
 
 
-module.exports = mongoose.model(gistmessage, messageSchema)
+module.exports = mongoose.model(gistymessage, messageSchema)
