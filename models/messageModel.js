@@ -9,7 +9,7 @@ const messageSchema = new Schema({
     },
     // @desc: Your special message 😜😜
     message: {
-        type: String,
+        type: [String],
         required: [true, 'Please add a value']
     }
 }, {
@@ -17,4 +17,4 @@ const messageSchema = new Schema({
 });
 
 
-module.exports = mongoose.model(gistymessage, messageSchema)
+module.exports = mongoose.model('gistymessage', messageSchema)

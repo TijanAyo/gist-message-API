@@ -1,3 +1,6 @@
+const Message = require('../models/messageModel')
+
+
 const welcome = (req, res) =>{
     res.json({
         Message: 'Welcome 👋',
@@ -16,16 +19,45 @@ const status = (req, res)=>{
     }
 }
 
-const messages = (req, res)=>{
-    res.json({
-        message: 'Display all gisty messages here'
-    })
+const messages = async (req, res)=>{
+    const msg = await Message.find()
+
+    res.status(200).json(msg)
 }
 
 
-const create_message = (req, res)=>{
-    res.json({
-        message: 'Create your gisty messages here'
+const create_message = async (req, res)=>{
+
+    /* if(!req.body.name){
+        res.status(400).json({error: "Significant other name can't be blank"})
+    }else if(!req.body.message){
+        res.status(400).json({error: "Write somthing special for your significant other"})
+    }else{
+        res.status(400).json({error: "No field was specified"})
+    } */
+
+    
+    if(!req.body.name || !req.body.message){
+        res.status(400).json({
+            error: "Required Field not specified"
+        })
+    }else if( req.body.name && req.body.message){
+        res.status(200).json({
+            message: "Created ..."
+        })
+    }else{
+        res.status(400).json({
+            error: "Something went wrong"
+        })
+    }
+
+    const message = await Message.create({
+        name: req.body.name,
+        message: req.body.message
+    })
+
+    res.status(200).json({
+        message: 'Created...'
     })
 }
 
