@@ -21,11 +21,11 @@ router.post('/api/v1/messages', create_message)
 
 // @desc: Update messages
 // @route: PATCH /api/v1/messages/:id
-router.put('api/v1/messages/:id', update_message)
+router.put('/api/v1/messages/:id', update_message)
 
 // @desc: Delete messages
 // @route: Delete /api/v1/messages/:id
-router.delete('api/v1/messages/:id', delete_message)
+router.delete('/api/v1/messages/:id', delete_message)
 
 
 module.exports = router;

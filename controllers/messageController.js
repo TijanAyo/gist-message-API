@@ -61,15 +61,32 @@ const create_message = async (req, res)=>{
     })
 }
 
-const update_message = (req, res)=>{
-    res.json({
-        message: 'update your gisty messages here'
-    })
+const update_message = async (req, res)=>{
+    const msg = await Message.findById(req.params.id)
+
+    if(!msg){
+        res.status(404).json({
+            error: `Gisty message with Id: ${req.params.id} doesn't exist 😕`
+        })
+    }
+
+    const updated_msg = await Message.findByIdAndUpdate(req.params.id, req.body, {new:true})
+    res.status(200).json(update_message)
 }
 
-const delete_message = (req, res)=>{
-    res.json({
-        message: 'delete your gisty messages here'
+const delete_message = async (req, res)=>{
+    const msg = await Message.findById(req.params.id)
+
+    if(!msg){
+        res.status(404).json({
+            error: `Gisty message with Id: ${req.params.id} doesn't exist 😕`
+        })
+    }
+
+    await msg.remove();
+
+    res.status(200).json({
+        message: `Your gisty message with id: ${req.params.id} has been removed 👋`
     })
 }
 
