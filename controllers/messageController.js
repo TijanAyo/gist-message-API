@@ -1,4 +1,4 @@
-const Message = require('../models/messageModel')
+const Message = require('../models/message')
 
 
 const welcome = (req, res) =>{
