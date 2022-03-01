@@ -16,7 +16,7 @@ GET ```/status```
 
 GET ```/api/v1/messages```
 
-### Update your gisty message
+### Update your Gisty Message
 
 PUT ```/api/v1/messages/:id```
 
