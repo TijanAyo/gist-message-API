@@ -6,22 +6,22 @@ This API allows you to write and view gisty message for that special someone... 
 
 ## Endpoints
 
-<b> Status </b>
+<b> ### Status </b>
 
 GET ```/status```
 
-Returns the status of the API
+<p> Returns the status of the API </p>
 
-<b> Get all Messages </b>
+<b> ### Get all Messages </b>
 
 GET ```/api/v1/messages```
 
-<b> Update your gisty message </b>
+<b> ### Update your gisty message </b>
 
 PUT ```/api/v1/messages/:id```
 
-Update an existing message. Would be Requiring authentication.
+<p>Update an existing message. Would be Requiring authentication.</p>
 
-The request body needs to be in JSON format and allows you to update the following properties:
+<p>The request body needs to be in JSON format and allows you to update the following properties:</p>
 
-message - String
+```message``` - String
