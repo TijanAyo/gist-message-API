@@ -6,17 +6,17 @@ This API allows you to write and view gisty message for that special someone... 
 
 ## Endpoints
 
-<b> ### Status </b>
+### Status
 
 GET ```/status```
 
 <p> Returns the status of the API </p>
 
-<b> ### Get all Messages </b>
+### Get all Messages
 
 GET ```/api/v1/messages```
 
-<b> ### Update your gisty message </b>
+### Update your gisty message
 
 PUT ```/api/v1/messages/:id```
 
