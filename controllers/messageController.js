@@ -20,45 +20,24 @@ const status = (req, res)=>{
 }
 
 const messages = async (req, res)=>{
-    const msg = await Message.find()
+    const msg = await Message.find().sort('-createdAt')
 
-    res.status(200).json(msg)
+    res.status(200).send(msg)
 }
 
 
 const create_message = async (req, res)=>{
-
-    /* if(!req.body.name){
-        res.status(400).json({error: "Significant other name can't be blank"})
-    }else if(!req.body.message){
-        res.status(400).json({error: "Write somthing special for your significant other"})
-    }else{
-        res.status(400).json({error: "No field was specified"})
-    } */
-
-    
     if(!req.body.name || !req.body.message){
-        res.status(400).json({
+        res.status(400).send({
             error: "Required Field not specified"
         })
-    }else if( req.body.name && req.body.message){
-        res.status(200).json({
-            message: "Created ..."
-        })
-    }else{
-        res.status(400).json({
-            error: "Something went wrong"
-        })
     }
-
-    const message = await Message.create({
+    const new_message = await Message.create({
         name: req.body.name,
         message: req.body.message
     })
 
-    res.status(200).json({
-        message: 'Created...'
-    })
+    res.status(200).json(new_message)
 }
 
 const update_message = async (req, res)=>{

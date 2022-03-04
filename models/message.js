@@ -13,7 +13,7 @@ const messageSchema = new Schema({
         required: [true, 'Please add a value']
     }
 }, {
-    timestamp: true,
+    timestamps: true,
 });
 
 
