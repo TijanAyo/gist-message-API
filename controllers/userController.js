@@ -16,7 +16,7 @@ const authenticate_user = async (req, res)=>{
         res.status(400).send({error: `${email} is already being used`})
     }
 
-    // Hash Password
+    /* // Hash Password
     const salt = bcrypt.genSalt(10)
     const hashed_password = await bcrypt.hash(password, salt)
 
@@ -27,10 +27,36 @@ const authenticate_user = async (req, res)=>{
     })
 
     if(user){
-        res.status(200).send({message: 'Gisty User Created 👍🏿', token: user.id})
+        res.status(200).send({
+            message: 'Gisty User Created 👍🏿', 
+            token: generateToken(user.id)
+        })
     }
     else{
         res.status(400).send({error: 'Invalid User Credential'})
+    } */
+
+    // Hash Password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    // Create User
+    const user = User.create({
+        name,
+        email,
+        password: hashedPassword
+    })
+
+    // Condition if user is created
+    if(user) {
+        res.status(201).json({
+            message: "User Created 👍🏿",
+            token: generateToken(user.id)
+        })
+    }else{
+        res.status(400).send({
+            error: "Invalid User Data"
+        })
     }
 }
 
@@ -42,11 +68,21 @@ const authorize_user = async (req, res)=>{
     }
 
 
-    res.json({message: 'Authorize user endpoint'})
+    // Checking for the user and compare passwd with hashed passwd in DB
+    const user = await User.findOne({email})
+
+    if (user && (await bcrypt.compare(password, user.password))){
+        res.json({
+            message:`${user.name} is logged in okay`,
+            token: generateToken(user.id)
+        })
+    }else{
+        res.status(400).json({error: 'Invalid credentials'})
+    }
 }
 
 
-// Generate JWT
+// Generating Token(JWT)
 const generateToken = (id) =>{
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '14d',
